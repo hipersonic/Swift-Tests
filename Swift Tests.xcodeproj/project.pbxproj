@@ -13,6 +13,16 @@
 		B393D1E81B78A8D100784BF4 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B393D1E71B78A8D100784BF4 /* Images.xcassets */; };
 		B393D1EB1B78A8D100784BF4 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = B393D1E91B78A8D100784BF4 /* LaunchScreen.xib */; };
 		B393D1F71B78A8D100784BF4 /* Swift_TestsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B393D1F61B78A8D100784BF4 /* Swift_TestsTests.swift */; };
+		B393D2011B78AFE400784BF4 /* DXEntryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B393D2001B78AFE400784BF4 /* DXEntryTableViewCell.swift */; };
+		B393D2051B79D53800784BF4 /* Entries.plist in Resources */ = {isa = PBXBuildFile; fileRef = B393D2041B79D53800784BF4 /* Entries.plist */; };
+		B393D2071B79F65A00784BF4 /* DXDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B393D2061B79F65A00784BF4 /* DXDetailsViewController.swift */; };
+		B393D20B1B7A101100784BF4 /* DXDetailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B393D20A1B7A101100784BF4 /* DXDetailsTableViewCell.swift */; };
+		B393D20D1B7A219900784BF4 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B393D20C1B7A219900784BF4 /* CoreLocation.framework */; };
+		B393D20F1B7B1B7200784BF4 /* DXEntryObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = B393D20E1B7B1B7200784BF4 /* DXEntryObject.swift */; };
+		B393D2111B7B250200784BF4 /* DXLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B393D2101B7B250200784BF4 /* DXLocationManager.swift */; };
+		B393D2151B7B64C300784BF4 /* DXMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B393D2141B7B64C300784BF4 /* DXMapViewController.swift */; };
+		B393D2171B7B656000784BF4 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B393D2161B7B656000784BF4 /* MapKit.framework */; };
+		B393D2191B7B6B6100784BF4 /* DXPointAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B393D2181B7B6B6100784BF4 /* DXPointAnnotation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +46,16 @@
 		B393D1F01B78A8D100784BF4 /* Swift TestsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Swift TestsTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B393D1F51B78A8D100784BF4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B393D1F61B78A8D100784BF4 /* Swift_TestsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Swift_TestsTests.swift; sourceTree = "<group>"; };
+		B393D2001B78AFE400784BF4 /* DXEntryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DXEntryTableViewCell.swift; path = Classes/TableViewCells/DXEntryTableViewCell.swift; sourceTree = "<group>"; };
+		B393D2041B79D53800784BF4 /* Entries.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entries.plist; sourceTree = "<group>"; };
+		B393D2061B79F65A00784BF4 /* DXDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DXDetailsViewController.swift; sourceTree = "<group>"; };
+		B393D20A1B7A101100784BF4 /* DXDetailsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DXDetailsTableViewCell.swift; sourceTree = "<group>"; };
+		B393D20C1B7A219900784BF4 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		B393D20E1B7B1B7200784BF4 /* DXEntryObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DXEntryObject.swift; path = Classes/DXEntryObject.swift; sourceTree = "<group>"; };
+		B393D2101B7B250200784BF4 /* DXLocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DXLocationManager.swift; path = Classes/DXLocationManager.swift; sourceTree = "<group>"; };
+		B393D2141B7B64C300784BF4 /* DXMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DXMapViewController.swift; sourceTree = "<group>"; };
+		B393D2161B7B656000784BF4 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		B393D2181B7B6B6100784BF4 /* DXPointAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DXPointAnnotation.swift; path = Classes/DXPointAnnotation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +63,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B393D2171B7B656000784BF4 /* MapKit.framework in Frameworks */,
+				B393D20D1B7A219900784BF4 /* CoreLocation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -59,6 +81,8 @@
 		B393D1D21B78A8D000784BF4 = {
 			isa = PBXGroup;
 			children = (
+				B393D2161B7B656000784BF4 /* MapKit.framework */,
+				B393D20C1B7A219900784BF4 /* CoreLocation.framework */,
 				B393D1DD1B78A8D100784BF4 /* Swift Tests */,
 				B393D1F31B78A8D100784BF4 /* Swift TestsTests */,
 				B393D1DC1B78A8D100784BF4 /* Products */,
@@ -79,9 +103,17 @@
 			children = (
 				B393D1E01B78A8D100784BF4 /* AppDelegate.swift */,
 				B393D1E21B78A8D100784BF4 /* ViewController.swift */,
+				B393D2101B7B250200784BF4 /* DXLocationManager.swift */,
+				B393D2061B79F65A00784BF4 /* DXDetailsViewController.swift */,
+				B393D20A1B7A101100784BF4 /* DXDetailsTableViewCell.swift */,
+				B393D2001B78AFE400784BF4 /* DXEntryTableViewCell.swift */,
+				B393D20E1B7B1B7200784BF4 /* DXEntryObject.swift */,
+				B393D2141B7B64C300784BF4 /* DXMapViewController.swift */,
+				B393D2181B7B6B6100784BF4 /* DXPointAnnotation.swift */,
 				B393D1E41B78A8D100784BF4 /* Main.storyboard */,
 				B393D1E71B78A8D100784BF4 /* Images.xcassets */,
 				B393D1E91B78A8D100784BF4 /* LaunchScreen.xib */,
+				B393D2041B79D53800784BF4 /* Entries.plist */,
 				B393D1DE1B78A8D100784BF4 /* Supporting Files */,
 			);
 			path = "Swift Tests";
@@ -161,6 +193,11 @@
 				TargetAttributes = {
 					B393D1DA1B78A8D100784BF4 = {
 						CreatedOnToolsVersion = 6.4;
+						SystemCapabilities = {
+							com.apple.Maps.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					B393D1EF1B78A8D100784BF4 = {
 						CreatedOnToolsVersion = 6.4;
@@ -193,6 +230,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B393D1E61B78A8D100784BF4 /* Main.storyboard in Resources */,
+				B393D2051B79D53800784BF4 /* Entries.plist in Resources */,
 				B393D1EB1B78A8D100784BF4 /* LaunchScreen.xib in Resources */,
 				B393D1E81B78A8D100784BF4 /* Images.xcassets in Resources */,
 			);
@@ -212,8 +250,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B393D2011B78AFE400784BF4 /* DXEntryTableViewCell.swift in Sources */,
+				B393D2071B79F65A00784BF4 /* DXDetailsViewController.swift in Sources */,
+				B393D20B1B7A101100784BF4 /* DXDetailsTableViewCell.swift in Sources */,
 				B393D1E31B78A8D100784BF4 /* ViewController.swift in Sources */,
 				B393D1E11B78A8D100784BF4 /* AppDelegate.swift in Sources */,
+				B393D2151B7B64C300784BF4 /* DXMapViewController.swift in Sources */,
+				B393D20F1B7B1B7200784BF4 /* DXEntryObject.swift in Sources */,
+				B393D2191B7B6B6100784BF4 /* DXPointAnnotation.swift in Sources */,
+				B393D2111B7B250200784BF4 /* DXLocationManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -411,6 +456,7 @@
 				B393D1FC1B78A8D100784BF4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		B393D1FD1B78A8D100784BF4 /* Build configuration list for PBXNativeTarget "Swift TestsTests" */ = {
 			isa = XCConfigurationList;
@@ -419,6 +465,7 @@
 				B393D1FF1B78A8D100784BF4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
