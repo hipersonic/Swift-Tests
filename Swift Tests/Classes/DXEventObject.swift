@@ -1,5 +1,5 @@
 //
-//  DXEntryObject.swift
+//  DXEventObject.swift
 //  Swift Tests
 //
 //  Created by Daniel Rangelov on 8/12/15.
@@ -9,14 +9,15 @@
 import UIKit
 import CoreLocation
 
-class DXEntryObject: NSObject {
+class DXEventObject: NSObject {
     
     var location : CLLocation?
     var text : String?
     var date: NSDate?
+    var price: Int = 0
     
-    class func initContentForDictionary(dictionary:NSDictionary) -> DXEntryObject {
-        var entry = DXEntryObject()
+    class func initContentFromDictionary(dictionary:NSDictionary) -> DXEventObject {
+        var entry = DXEventObject()
         entry.restoreFromDictionary(dictionary)
         return entry
     }
@@ -31,6 +32,11 @@ class DXEntryObject: NSObject {
         
         if (locationLat != nil && locationLng != nil) {
             location = CLLocation(latitude: locationLat!, longitude: locationLng!)
+        }
+        
+        var value = dictionary.objectForKey("price") as? Int
+        if (value != nil) {
+            price = value!
         }
     }
     
@@ -48,6 +54,10 @@ class DXEntryObject: NSObject {
         
         if date != nil {
             result.setValue(date, forKey:"date")
+        }
+        
+        if price > 0 {
+            result.setValue(price, forKey: "price")
         }
         
         return result

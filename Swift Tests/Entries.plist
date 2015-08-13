@@ -24,7 +24,18 @@
 		<key>icon_name</key>
 		<string>renault</string>
 		<key>events</key>
-		<array/>
+		<array>
+			<dict>
+				<key>locationLat</key>
+				<real>42.701823</real>
+				<key>locationLng</key>
+				<real>23.304822</real>
+				<key>text</key>
+				<string>Stoyan C8 - Scenic</string>
+				<key>date</key>
+				<date>2015-08-12T16:30:07Z</date>
+			</dict>
+		</array>
 	</dict>
 	<dict>
 		<key>name</key>
@@ -59,6 +70,18 @@
 		<array>
 			<dict>
 				<key>locationLat</key>
+				<real>42.701823</real>
+				<key>locationLng</key>
+				<real>23.304822</real>
+				<key>text</key>
+				<string>TEST</string>
+				<key>date</key>
+				<date>2015-08-04T16:30:07Z</date>
+				<key>price</key>
+				<integer>20</integer>
+			</dict>
+			<dict>
+				<key>locationLat</key>
 				<real>42.663435</real>
 				<key>locationLng</key>
 				<real>23.400071</real>
@@ -66,6 +89,8 @@
 				<string>Test</string>
 				<key>date</key>
 				<date>2015-08-12T08:33:57Z</date>
+				<key>price</key>
+				<integer>20</integer>
 			</dict>
 			<dict>
 				<key>locationLat</key>
@@ -76,6 +101,8 @@
 				<string>Test2</string>
 				<key>date</key>
 				<date>2015-08-12T08:33:57Z</date>
+				<key>price</key>
+				<integer>20</integer>
 			</dict>
 			<dict>
 				<key>locationLat</key>
@@ -86,6 +113,8 @@
 				<string>Test3</string>
 				<key>date</key>
 				<date>2015-08-12T08:33:57Z</date>
+				<key>price</key>
+				<integer>20</integer>
 			</dict>
 			<dict>
 				<key>locationLat</key>
@@ -96,6 +125,56 @@
 				<string>Test4</string>
 				<key>date</key>
 				<date>2015-08-12T08:33:57Z</date>
+				<key>price</key>
+				<integer>20</integer>
+			</dict>
+			<dict>
+				<key>locationLat</key>
+				<real>42.719553</real>
+				<key>locationLng</key>
+				<real>23.254862</real>
+				<key>text</key>
+				<string>TEST</string>
+				<key>date</key>
+				<date>2015-08-12T16:30:07Z</date>
+				<key>price</key>
+				<integer>20</integer>
+			</dict>
+			<dict>
+				<key>locationLat</key>
+				<real>42.722397</real>
+				<key>locationLng</key>
+				<real>23.257561</real>
+				<key>text</key>
+				<string>TEST</string>
+				<key>date</key>
+				<date>2015-08-12T16:30:07Z</date>
+				<key>price</key>
+				<integer>20</integer>
+			</dict>
+			<dict>
+				<key>locationLat</key>
+				<real>42.72032</real>
+				<key>locationLng</key>
+				<real>23.24858</real>
+				<key>text</key>
+				<string>TEST</string>
+				<key>date</key>
+				<date>2015-08-12T16:30:07Z</date>
+				<key>price</key>
+				<integer>20</integer>
+			</dict>
+			<dict>
+				<key>locationLat</key>
+				<real>42.716767</real>
+				<key>locationLng</key>
+				<real>23.257432</real>
+				<key>text</key>
+				<string>TEST</string>
+				<key>date</key>
+				<date>2015-08-12T16:30:07Z</date>
+				<key>price</key>
+				<integer>20</integer>
 			</dict>
 		</array>
 	</dict>

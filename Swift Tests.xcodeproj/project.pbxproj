@@ -18,11 +18,14 @@
 		B393D2071B79F65A00784BF4 /* DXDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B393D2061B79F65A00784BF4 /* DXDetailsViewController.swift */; };
 		B393D20B1B7A101100784BF4 /* DXDetailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B393D20A1B7A101100784BF4 /* DXDetailsTableViewCell.swift */; };
 		B393D20D1B7A219900784BF4 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B393D20C1B7A219900784BF4 /* CoreLocation.framework */; };
-		B393D20F1B7B1B7200784BF4 /* DXEntryObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = B393D20E1B7B1B7200784BF4 /* DXEntryObject.swift */; };
+		B393D20F1B7B1B7200784BF4 /* DXEventObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = B393D20E1B7B1B7200784BF4 /* DXEventObject.swift */; };
 		B393D2111B7B250200784BF4 /* DXLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B393D2101B7B250200784BF4 /* DXLocationManager.swift */; };
 		B393D2151B7B64C300784BF4 /* DXMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B393D2141B7B64C300784BF4 /* DXMapViewController.swift */; };
 		B393D2171B7B656000784BF4 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B393D2161B7B656000784BF4 /* MapKit.framework */; };
 		B393D2191B7B6B6100784BF4 /* DXPointAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B393D2181B7B6B6100784BF4 /* DXPointAnnotation.swift */; };
+		B3D20B281B7CB5BF00595393 /* DXAddEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D20B271B7CB5BF00595393 /* DXAddEntryViewController.swift */; };
+		B3D20B2A1B7CE38A00595393 /* DXDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D20B291B7CE38A00595393 /* DXDataProvider.swift */; };
+		B3D20B2C1B7CE54500595393 /* DXEntryObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D20B2B1B7CE54500595393 /* DXEntryObject.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,11 +54,14 @@
 		B393D2061B79F65A00784BF4 /* DXDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DXDetailsViewController.swift; sourceTree = "<group>"; };
 		B393D20A1B7A101100784BF4 /* DXDetailsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DXDetailsTableViewCell.swift; sourceTree = "<group>"; };
 		B393D20C1B7A219900784BF4 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
-		B393D20E1B7B1B7200784BF4 /* DXEntryObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DXEntryObject.swift; path = Classes/DXEntryObject.swift; sourceTree = "<group>"; };
+		B393D20E1B7B1B7200784BF4 /* DXEventObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DXEventObject.swift; path = Classes/DXEventObject.swift; sourceTree = "<group>"; };
 		B393D2101B7B250200784BF4 /* DXLocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DXLocationManager.swift; path = Classes/DXLocationManager.swift; sourceTree = "<group>"; };
 		B393D2141B7B64C300784BF4 /* DXMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DXMapViewController.swift; sourceTree = "<group>"; };
 		B393D2161B7B656000784BF4 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		B393D2181B7B6B6100784BF4 /* DXPointAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DXPointAnnotation.swift; path = Classes/DXPointAnnotation.swift; sourceTree = "<group>"; };
+		B3D20B271B7CB5BF00595393 /* DXAddEntryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DXAddEntryViewController.swift; sourceTree = "<group>"; };
+		B3D20B291B7CE38A00595393 /* DXDataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DXDataProvider.swift; sourceTree = "<group>"; };
+		B3D20B2B1B7CE54500595393 /* DXEntryObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DXEntryObject.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,14 +108,11 @@
 			isa = PBXGroup;
 			children = (
 				B393D1E01B78A8D100784BF4 /* AppDelegate.swift */,
-				B393D1E21B78A8D100784BF4 /* ViewController.swift */,
+				B3D20B291B7CE38A00595393 /* DXDataProvider.swift */,
 				B393D2101B7B250200784BF4 /* DXLocationManager.swift */,
-				B393D2061B79F65A00784BF4 /* DXDetailsViewController.swift */,
-				B393D20A1B7A101100784BF4 /* DXDetailsTableViewCell.swift */,
-				B393D2001B78AFE400784BF4 /* DXEntryTableViewCell.swift */,
-				B393D20E1B7B1B7200784BF4 /* DXEntryObject.swift */,
-				B393D2141B7B64C300784BF4 /* DXMapViewController.swift */,
-				B393D2181B7B6B6100784BF4 /* DXPointAnnotation.swift */,
+				B3D20B251B7C8B5B00595393 /* VC */,
+				B3D20B241B7C8B3A00595393 /* TableViewCells */,
+				B3D20B261B7C8B6B00595393 /* OtherObjects */,
 				B393D1E41B78A8D100784BF4 /* Main.storyboard */,
 				B393D1E71B78A8D100784BF4 /* Images.xcassets */,
 				B393D1E91B78A8D100784BF4 /* LaunchScreen.xib */,
@@ -142,6 +145,36 @@
 				B393D1F51B78A8D100784BF4 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		B3D20B241B7C8B3A00595393 /* TableViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				B393D20A1B7A101100784BF4 /* DXDetailsTableViewCell.swift */,
+				B393D2001B78AFE400784BF4 /* DXEntryTableViewCell.swift */,
+			);
+			name = TableViewCells;
+			sourceTree = "<group>";
+		};
+		B3D20B251B7C8B5B00595393 /* VC */ = {
+			isa = PBXGroup;
+			children = (
+				B393D1E21B78A8D100784BF4 /* ViewController.swift */,
+				B393D2061B79F65A00784BF4 /* DXDetailsViewController.swift */,
+				B393D2141B7B64C300784BF4 /* DXMapViewController.swift */,
+				B3D20B271B7CB5BF00595393 /* DXAddEntryViewController.swift */,
+			);
+			name = VC;
+			sourceTree = "<group>";
+		};
+		B3D20B261B7C8B6B00595393 /* OtherObjects */ = {
+			isa = PBXGroup;
+			children = (
+				B3D20B2B1B7CE54500595393 /* DXEntryObject.swift */,
+				B393D20E1B7B1B7200784BF4 /* DXEventObject.swift */,
+				B393D2181B7B6B6100784BF4 /* DXPointAnnotation.swift */,
+			);
+			name = OtherObjects;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -252,13 +285,16 @@
 			files = (
 				B393D2011B78AFE400784BF4 /* DXEntryTableViewCell.swift in Sources */,
 				B393D2071B79F65A00784BF4 /* DXDetailsViewController.swift in Sources */,
+				B3D20B2A1B7CE38A00595393 /* DXDataProvider.swift in Sources */,
 				B393D20B1B7A101100784BF4 /* DXDetailsTableViewCell.swift in Sources */,
 				B393D1E31B78A8D100784BF4 /* ViewController.swift in Sources */,
 				B393D1E11B78A8D100784BF4 /* AppDelegate.swift in Sources */,
 				B393D2151B7B64C300784BF4 /* DXMapViewController.swift in Sources */,
-				B393D20F1B7B1B7200784BF4 /* DXEntryObject.swift in Sources */,
+				B393D20F1B7B1B7200784BF4 /* DXEventObject.swift in Sources */,
+				B3D20B281B7CB5BF00595393 /* DXAddEntryViewController.swift in Sources */,
 				B393D2191B7B6B6100784BF4 /* DXPointAnnotation.swift in Sources */,
 				B393D2111B7B250200784BF4 /* DXLocationManager.swift in Sources */,
+				B3D20B2C1B7CE54500595393 /* DXEntryObject.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

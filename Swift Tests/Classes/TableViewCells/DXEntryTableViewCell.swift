@@ -10,6 +10,7 @@ import UIKit
 
 protocol CellProtocol {
     func cellValueChanged(sender:DXEntryTableViewCell)
+    func cellAddEntryButtonPressed(sender:DXEntryTableViewCell)
 }
 
 class DXEntryTableViewCell: UITableViewCell, UIAlertViewDelegate {
@@ -40,7 +41,7 @@ class DXEntryTableViewCell: UITableViewCell, UIAlertViewDelegate {
    
     
     @IBAction func onButtonAddPressed(sender: AnyObject) {
-        
+        /*
         let alertView = UIAlertView(
             title: "New Entry",
             message: "Add new entry?",
@@ -50,6 +51,9 @@ class DXEntryTableViewCell: UITableViewCell, UIAlertViewDelegate {
         )
         
         alertView.show()
+        */
+        
+        delegate?.cellAddEntryButtonPressed(self)
         
     }
     
@@ -71,7 +75,7 @@ class DXEntryTableViewCell: UITableViewCell, UIAlertViewDelegate {
         case 1 :
             var date =  NSDate()
             
-            var newEntry : DXEntryObject = DXEntryObject()
+            var newEntry : DXEventObject = DXEventObject()
             newEntry.date = date;
             newEntry.location = DXLocationManager.sharedInstance.location
             newEntry.text = "New Entry"

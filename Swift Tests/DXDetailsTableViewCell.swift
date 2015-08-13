@@ -10,6 +10,10 @@ import UIKit
 
 class DXDetailsTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var lblDate: UILabel!
+    @IBOutlet weak var lblLocation: UILabel!
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

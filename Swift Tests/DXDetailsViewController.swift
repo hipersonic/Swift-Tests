@@ -23,7 +23,7 @@ class DXDetailsViewController: UIViewController {
             let tmpEvents = entryDescription["events"] as! NSMutableArray
             
             for event in tmpEvents {
-                let eventLoaded : DXEntryObject = DXEntryObject.initContentForDictionary(event as! NSDictionary)
+                let eventLoaded : DXEventObject = DXEventObject.initContentFromDictionary(event as! NSDictionary)
                 events.addObject(eventLoaded)
             }
             
@@ -41,79 +41,27 @@ class DXDetailsViewController: UIViewController {
         if (entryDescription.allKeys.count > 0) {
             updateContents(entryDescription)
         }
-        
-        runTests()
-        
     }
     
-    func runTests() {
-        
-        let location1:CLLocation = CLLocation(latitude: 42.677395, longitude: 23.425619)
-        let location2:CLLocation = CLLocation(latitude: 42.679452, longitude: 23.437907)
-        let location3:CLLocation = CLLocation(latitude: 42.672027, longitude: 23.428523)
-        let location4:CLLocation = CLLocation(latitude: 42.676956, longitude: 23.434983)
-        //---- Group 2
-        let location5:CLLocation = CLLocation(latitude: 42.675956, longitude: 23.432983)
-        let location6:CLLocation = CLLocation(latitude: 42.676834, longitude: 23.428074)
-        let location7:CLLocation = CLLocation(latitude: 42.673964, longitude: 23.435569)
-        let location8:CLLocation = CLLocation(latitude: 42.679417, longitude: 23.435959)
-        //---- Group 3
-        let location9:CLLocation = CLLocation(latitude: 42.719553, longitude: 23.254862)
-        let location10:CLLocation = CLLocation(latitude: 42.722397, longitude: 23.257561)
-        let location11:CLLocation = CLLocation(latitude: 42.720320, longitude: 23.248580)
-        let location12:CLLocation = CLLocation(latitude: 42.716767, longitude: 23.257432)
-
-        //---- Random locations
-        let location13:CLLocation = CLLocation(latitude: 42.681552, longitude: 23.316422)
-        let location14:CLLocation = CLLocation(latitude: 42.735540, longitude: 23.314362)
-        
-        let locations : NSMutableArray = [location1, location2, location3, location4, location5, location6, location7, location8, location9, location10, location11, location12, location13, location14]
-        let locationsSorted : NSMutableArray = []
-        
-        var minDistance = DBL_MAX
-        var centerLocation : CLLocation = locations[0] as! CLLocation
-        let raduisCloseLocations : Double = 600
-        let thresholdDistance = raduisCloseLocations*2
-        
-        //Group the locations into regions
-        while locations.count > 0 {
-            let location:CLLocation = locations[0] as! CLLocation;
-            var pointsCluster:NSMutableArray = [location]
-            locations.removeObject(location)
-            
-            //var currentDistance = 0.0
+   
     
-            for locationCompare in locations {
-                let tmpDistance = location.distanceFromLocation(locationCompare as! CLLocation)
-                println(tmpDistance)
-                if tmpDistance < thresholdDistance {
-                    println("Add object")
-                    //currentDistance += tmpDistance
-                    pointsCluster.addObject(locationCompare)
-                    locations.removeObject(locationCompare)
-                }
-            }
-            
-            if pointsCluster.count > 0 {
-                //pointsCluster.addObject(location)
-                locationsSorted.addObject(pointsCluster)
-            }
-            
-            /*
-            if minDistance > currentDistance {
-            minDistance = currentDistance
-            centerLocation = location as! CLLocation
-            }
-            */
-
+    @IBAction func onBarButtonMapPressed(sender: AnyObject) {
+        
+        var locations : NSMutableArray = []
+        
+        for event in events {
+            let tmpLocation : CLLocation = event.location
+            locations.addObject(tmpLocation)
         }
         
+        var viewController = self.storyboard?.instantiateViewControllerWithIdentifier("MapVC") as! DXMapViewController
         
-        //Find the center points
+        viewController.locations = locations
         
-        
+        self.navigationController?.pushViewController(viewController, animated: true)
     }
 
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -122,16 +70,23 @@ class DXDetailsViewController: UIViewController {
     func updateContents(description: NSDictionary) {
         var events = description["events"] as! NSMutableArray
         
-        var dateComponents : NSDateComponents
+        var daysPassed:Int = 0
         
-        /*
         if events.count > 0 {
-            let dateFirst = events[0] as! NSDate
-            dateComponents = NSCalendar.currentCalendar().components(NSCalendarUnit.CalendarUnitDay, fromDate: dateFirst, toDate: NSDate(), options: NSCalendarOptions.allZeros)
+            var event:DXEventObject =  DXEventObject.initContentFromDictionary(events[0] as! NSDictionary)
+            if event.date != nil {
+                let dateFirst:NSDate = event.date!
+                
+                let cal = NSCalendar.currentCalendar()
+                let unit:NSCalendarUnit = .CalendarUnitDay
+                let components = cal.components(unit, fromDate: dateFirst, toDate: NSDate(), options: nil)
+                
+                daysPassed = components.day
+            }
         }
-        */
         
-        lblDetails.text = "\(events.count) in "
+        let daysString = daysPassed > 0 ? "in \(daysPassed) days" : ""
+        lblDetails.text = events.count > 0 ? "\(events.count) entries \(daysString)" : "No entries"
         lblTitle.text = description["name"] as! NSString as String
         var imgName = description["icon_name"] as! NSString as String
         imgIcon.image = UIImage(named: "\(imgName).png")
@@ -155,14 +110,51 @@ class DXDetailsViewController: UIViewController {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell = tableView.dequeueReusableCellWithIdentifier("DetailsCell", forIndexPath: indexPath) as! DXDetailsTableViewCell
         
-        let event = events[indexPath.row] as! DXEntryObject
+        let event = events[indexPath.row] as! DXEventObject
         
         if event.date != nil {
             let dateFormatter = NSDateFormatter()
-            dateFormatter.dateFormat = "yyyy-MM-dd 'at' HH:mm"
+            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
             
+            cell.lblDate?.text = dateFormatter.stringFromDate(event.date!);
+        }
+        
+        if event.location != nil {
+            CLGeocoder().reverseGeocodeLocation(event.location, completionHandler: {(placemarks, error)-> Void in
+                if (error != nil) {
+                    println("Reverse geocoder failed with error" + error.localizedDescription)
+                    return
+                }
+                
+                
+                if placemarks.count > 0 {
+                    let placemark : CLPlacemark = placemarks[0] as! CLPlacemark
+
+                    var text = placemark.subLocality
+                    
+                    if text == nil {
+                        text = placemark.thoroughfare
+                    }
+                    if text == nil {
+                        text = placemark.name
+                    }
+                    if text == nil {
+                        text = placemark.locality
+                    }
+                    if text == nil {
+                        text = ""
+                    }
+                    
+                    cell.lblLocation.text = text
+                    
+                } else {
+                    println("Problem with the data received from geocoder")
+                }
+            })
+
             
-            cell.textLabel?.text = dateFormatter.stringFromDate(event.date!);
+        } else {
+            cell.lblLocation.text = "Unknown Location"
         }
         
         

@@ -12,6 +12,8 @@ import MapKit
 class DXMapViewController: UIViewController, MKMapViewDelegate {
 
     @IBOutlet weak var mapView: MKMapView!
+    let raduisCloseLocations : Double = 1000
+    
     
     var locations:NSArray = [] {
         didSet {
@@ -45,12 +47,7 @@ class DXMapViewController: UIViewController, MKMapViewDelegate {
         let locationsUnSorted : NSMutableArray = NSMutableArray(array:locations)
         let locationsSorted : NSMutableArray = []
         
-        var minDistance = DBL_MAX
-        var centerLocation : CLLocation = locationsUnSorted[0] as! CLLocation
-        let raduisCloseLocations : Double = 1000
-        let thresholdDistance = raduisCloseLocations*2
-        
-        
+        //Divide locations into regions
         while locationsUnSorted.count > 0 {
             let location:CLLocation = locationsUnSorted[0] as! CLLocation;
             locationsUnSorted.removeObject(location)
@@ -59,13 +56,9 @@ class DXMapViewController: UIViewController, MKMapViewDelegate {
             
             var currentDistance = 0.0
             
-            
-            
             for locationCompare in locationsUnSorted {
                 let tmpDistance = location.distanceFromLocation(locationCompare as! CLLocation)
-                println(tmpDistance)
-                if tmpDistance < thresholdDistance {
-                    println("Add object")
+                if tmpDistance < raduisCloseLocations {
                     currentDistance += tmpDistance
                     pointsCluster.addObject(locationCompare)
                     locationsUnSorted.removeObject(locationCompare)
@@ -73,26 +66,47 @@ class DXMapViewController: UIViewController, MKMapViewDelegate {
             }
             
             if pointsCluster.count > 0 {
-                //pointsCluster.addObject(location)
                 locationsSorted.addObject(pointsCluster)
             }
-            
-            
-            /*
-            if minDistance > currentDistance {
-            minDistance = currentDistance
-            centerLocation = location as! CLLocation
-            }
-            */
-            
         }
+        
+        
+        //Add region circle overlay
+        for locationsRegioned in locationsSorted {
+            let currentRegion:NSArray = locationsRegioned as! NSArray
+            
+            if currentRegion.count > 1 {
+                var minDistance = DBL_MAX
+                var centerLocation : CLLocation = currentRegion[0] as! CLLocation
+                
+                for location in currentRegion {
+                    var currentDistance = 0.0
+                    
+                    for locationCompare in locationsUnSorted {
+                        if location as! CLLocation != locationCompare as! CLLocation {
+                            let tmpDistance = location.distanceFromLocation(locationCompare as! CLLocation)
+                            currentDistance += tmpDistance
+                        }
+                        
+                        if minDistance > currentDistance {
+                            minDistance = currentDistance
+                            centerLocation = location as! CLLocation
+                        }
+                    }
+                }
+                
+                var circle = MKCircle(centerCoordinate: centerLocation.coordinate, radius:raduisCloseLocations as CLLocationDistance)
+                self.mapView.addOverlay(circle)
+            }
+        }
+
+        
         return locationsSorted
     }
     
     func loadLocations(locations: NSArray) {
         
         let locationsSorted : NSArray = sortLocationsIntoRegions(locations)
-        
         
         for var i = 0; i < locationsSorted.count; i++  {
             var regionLocations:NSArray = locationsSorted.objectAtIndex(i) as! NSArray
@@ -123,7 +137,6 @@ class DXMapViewController: UIViewController, MKMapViewDelegate {
         }
         
         
-        
         //Span of the map
         let mapCenter : CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 42.697696, longitude: 23.321788)
         mapView.centerCoordinate = mapCenter
@@ -136,14 +149,29 @@ class DXMapViewController: UIViewController, MKMapViewDelegate {
         if (annotation.isKindOfClass(MKUserLocation)){
             return nil
         }
+        
+        var customAnnotation : DXPointAnnotation = annotation as! DXPointAnnotation
+        
         var myPin = mapView.dequeueReusableAnnotationViewWithIdentifier("MyIdentifier") as? MKPinAnnotationView
         if myPin != nil {
+            myPin?.pinColor = customAnnotation.color
             return myPin
         }
         
-        var customAnnotation : DXPointAnnotation = annotation as! DXPointAnnotation
         myPin = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "MyIdentifier")
         myPin?.pinColor = customAnnotation.color
         return myPin
+    }
+    
+    func mapView(mapView: MKMapView!, rendererForOverlay overlay: MKOverlay!) -> MKOverlayRenderer! {
+        
+        if (overlay is MKCircle) {
+            var pr = MKCircleRenderer(overlay: overlay)
+            pr.strokeColor = UIColor.blueColor().colorWithAlphaComponent(0.6)
+            pr.fillColor = UIColor.blueColor().colorWithAlphaComponent(0.1)
+            pr.lineWidth = 1
+            return pr
+        }
+        return nil
     }
 }
