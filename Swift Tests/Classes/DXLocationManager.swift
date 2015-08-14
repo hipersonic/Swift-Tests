@@ -24,6 +24,8 @@ class DXLocationManager: NSObject, CLLocationManagerDelegate {
     }
     
     
+    // MARK: - Convenince Methods
+    
     func startUpdatingLocation() {
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -34,6 +36,9 @@ class DXLocationManager: NSObject, CLLocationManagerDelegate {
     func stopUpdatingLocation() {
         locationManager.stopUpdatingLocation()
     }
+    
+    
+    // MARK: - Delegate methods
     
     func locationManager(manager: CLLocationManager!, didFailWithError error: NSError!) {
         println("Error while updating location " + error.localizedDescription)
@@ -50,19 +55,9 @@ class DXLocationManager: NSObject, CLLocationManagerDelegate {
             
             if placemarks.count > 0 {
                 self.placemark = placemarks[0] as? CLPlacemark
-                self.displayLocationInfo(self.placemark!)
             } else {
                 println("Problem with the data received from geocoder")
             }
         })
-    }
-    
-    func displayLocationInfo(placemark: CLPlacemark) {
-        //stop updating location to save battery life
-        stopUpdatingLocation()
-        println(placemark.locality != nil ? placemark.locality : "")
-        println(placemark.postalCode != nil ? placemark.postalCode : "")
-        println(placemark.administrativeArea != nil ? placemark.administrativeArea : "")
-        println(placemark.country != nil ? placemark.country : "")
     }
 }

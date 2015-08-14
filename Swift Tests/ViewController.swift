@@ -16,6 +16,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var indexPathUpdatedCell:NSIndexPath?
     
     
+    // MARK: - View Related
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -28,6 +30,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         // Dispose of any resources that can be recreated.
         
     }
+    
+    
+    // MARK: - User Interaction
     
     @IBAction func onBarButtonMapPressed(sender: AnyObject) {
         var viewController = self.storyboard?.instantiateViewControllerWithIdentifier("MapVC") as! DXMapViewController;
@@ -42,6 +47,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
 
 
+    // MARK: - TableView
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return DXDataProvider.sharedInstance.entries.count
     }
@@ -66,17 +73,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.navigationController?.pushViewController(viewController, animated: true)
     }
     
-    func cellValueChanged(sender: DXEntryTableViewCell) {
-        var indexPathRow = tableView.indexPathForCell(sender)?.row
-
-        DXDataProvider.sharedInstance.entries.removeObjectAtIndex(indexPathRow!)
-        DXDataProvider.sharedInstance.entries.insertObject(sender.entryObject!, atIndex: indexPathRow!)
-        
-        DXDataProvider.sharedInstance.saveData()
-        
-        let resultDictionary = NSMutableArray(contentsOfFile: path)
-        //println("Saved Entries.plist file is --> \(resultDictionary)")
-    }
+    
+    // MARK: - Delegate Methods
     
     func cellAddEntryButtonPressed(sender: DXEntryTableViewCell) {
         indexPathUpdatedCell = tableView.indexPathForCell(sender)

@@ -23,6 +23,8 @@ class DXDataProvider: NSObject {
         loadData()
     }
     
+    // MARK: Convenience methods
+    
     func loadData () {
         entries.removeAllObjects()
         

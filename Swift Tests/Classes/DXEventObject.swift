@@ -16,6 +16,16 @@ class DXEventObject: NSObject {
     var date: NSDate?
     var price: Int = 0
     
+    override var description : String {
+        return " text : \(text) " +
+            " date : \(date) " +
+            " price : \(price) " +
+        " location : \(location) "
+    }
+    
+    
+     // MARK: - Serialization
+    
     class func initContentFromDictionary(dictionary:NSDictionary) -> DXEventObject {
         var entry = DXEventObject()
         entry.restoreFromDictionary(dictionary)
@@ -63,11 +73,6 @@ class DXEventObject: NSObject {
         return result
     }
     
-    override var description : String {
-        return " text : \(text) " +
-        " date : \(date) " +
-        " price : \(price) " +
-        " location : \(location) "
-    }
+   
 }
 

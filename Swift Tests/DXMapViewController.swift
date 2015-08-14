@@ -15,6 +15,8 @@ class DXMapViewController: UIViewController, MKMapViewDelegate {
     let raduisCloseLocations : Double = 1000
     
     
+    // MARK: - Setters
+    
     var locations:NSArray = [] {
         didSet {
             if self.isViewLoaded() {
@@ -22,6 +24,8 @@ class DXMapViewController: UIViewController, MKMapViewDelegate {
             }
         }
     }
+    
+    // MARK: - View Related
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,7 +41,6 @@ class DXMapViewController: UIViewController, MKMapViewDelegate {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
     
     
     // MARK: - User logic
@@ -143,6 +146,9 @@ class DXMapViewController: UIViewController, MKMapViewDelegate {
         mapView.setRegion(MKCoordinateRegionMake(mapCenter, MKCoordinateSpanMake(0.4,0.4)), animated: true)
 
     }
+    
+    
+    // MARK: - MapView
     
     func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
         

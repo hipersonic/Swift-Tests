@@ -26,6 +26,9 @@ class DXAddEntryViewController: UIViewController {
     var location:CLLocation?
     var price:Int = 0
     
+    
+    // MARK: - View Related
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -99,6 +102,9 @@ class DXAddEntryViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    
+    // MARK: - User actions
+    
     @IBAction func tapGestureHandler(sender: AnyObject) {
         self.view.endEditing(true)
     }
@@ -109,14 +115,5 @@ class DXAddEntryViewController: UIViewController {
         delegate?.addEntryControllerDidConfirmEntry(self)
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

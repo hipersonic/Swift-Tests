@@ -16,6 +16,9 @@ class DXDetailsTableViewCell: UITableViewCell {
     @IBOutlet weak var lblPrice: UILabel!
     @IBOutlet weak var lblDescription: UILabel!
     
+    
+    // MARK: - Setters
+    
     var eventObject : DXEventObject? {
         didSet {
             if eventObject != nil {
@@ -23,6 +26,9 @@ class DXDetailsTableViewCell: UITableViewCell {
             }
         }
     }
+    
+    
+    // MARK: - Cell Related
     
     override func awakeFromNib() {
         super.awakeFromNib()

@@ -13,6 +13,15 @@ class DXEntryObject: NSObject {
     var name : String?
     var events: NSMutableArray = []
     
+    override var description : String {
+        return " name : \(name) " +
+            " icon : \(iconName) " +
+        " events : \(events) "
+    }
+    
+    
+    // MARK: - Serialization
+    
     class func initContentFromDictionary(dictionary:NSDictionary) -> DXEntryObject {
         var entry = DXEntryObject()
         entry.restoreFromDictionary(dictionary)
@@ -57,11 +66,8 @@ class DXEntryObject: NSObject {
         return result
     }
 
-    override var description : String {
-        return " name : \(name) " +
-        " icon : \(iconName) " +
-        " events : \(events) "
-    }
+    
+    // MARK: - Convenience Methods
     
     func locations() -> NSArray {
         var result = NSMutableArray()

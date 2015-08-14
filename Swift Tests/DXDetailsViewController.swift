@@ -9,7 +9,7 @@
 import UIKit
 import CoreLocation
 
-class DXDetailsViewController: UIViewController {
+class DXDetailsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var imgIcon: UIImageView!
     @IBOutlet weak var lblTitle: UILabel!
@@ -17,6 +17,7 @@ class DXDetailsViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var lblIncome: UILabel!
     
+    // MARK: - Setters
     
     var entryObject:DXEntryObject?  {
         didSet {
@@ -25,6 +26,8 @@ class DXDetailsViewController: UIViewController {
             }
         }
     }
+    
+    // MARK: - View Related
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,19 +41,6 @@ class DXDetailsViewController: UIViewController {
     }
     
    
-    
-    @IBAction func onBarButtonMapPressed(sender: AnyObject) {
-        
-        var viewController = self.storyboard?.instantiateViewControllerWithIdentifier("MapVC") as! DXMapViewController
-        
-        if entryObject != nil {
-            viewController.locations = entryObject!.locations()
-        }
-        
-        self.navigationController?.pushViewController(viewController, animated: true)
-    }
-
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -83,11 +73,23 @@ class DXDetailsViewController: UIViewController {
         
         lblIncome.text = "Income: \(entryObject.allEventsIncomeSum())"
     }
-
-    @IBAction func onButtonResetPressed(sender: AnyObject) {
-        
-    }
     
+    
+    // MARK: - User Actions
+    
+    @IBAction func onBarButtonMapPressed(sender: AnyObject) {
+        
+        var viewController = self.storyboard?.instantiateViewControllerWithIdentifier("MapVC") as! DXMapViewController
+        
+        if entryObject != nil {
+            viewController.locations = entryObject!.locations()
+        }
+        
+        self.navigationController?.pushViewController(viewController, animated: true)
+    }
+  
+    
+    // MARK: - TableView Delegate and DataSource
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         var count : Int = 0
@@ -104,4 +106,5 @@ class DXDetailsViewController: UIViewController {
         cell.eventObject = event
         return cell
     }
+    
 }

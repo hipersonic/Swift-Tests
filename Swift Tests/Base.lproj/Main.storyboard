@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="g96-UC-Jau">
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -75,7 +76,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="Zu2-jY-Fzl"/>
                                 </constraints>
-                                <color key="textColor" patternImage="1F750ECF-3B29-46D3-BFA5-D56278BA37DC" colorSpace="pattern"/>
+                                <color key="textColor" patternImage="B8B21340-3761-4B89-8A8F-3478F37AA512" colorSpace="pattern"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="10"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
@@ -570,7 +571,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="1F750ECF-3B29-46D3-BFA5-D56278BA37DC" width="512" height="512">
+        <image name="B8B21340-3761-4B89-8A8F-3478F37AA512" width="512" height="512">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw

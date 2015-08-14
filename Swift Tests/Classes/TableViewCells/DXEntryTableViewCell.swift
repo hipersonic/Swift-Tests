@@ -9,7 +9,6 @@
 import UIKit
 
 protocol CellProtocol {
-    func cellValueChanged(sender:DXEntryTableViewCell)
     func cellAddEntryButtonPressed(sender:DXEntryTableViewCell)
 }
 
@@ -21,11 +20,15 @@ class DXEntryTableViewCell: UITableViewCell, UIAlertViewDelegate {
     
     var delegate:CellProtocol?
     
+    // MARK: - Setters
+    
     var entryObject:DXEntryObject? {
         didSet {
             updateCellContents(entryObject!)
         }
     }
+    
+    // MARK: - Cell Related
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -39,24 +42,6 @@ class DXEntryTableViewCell: UITableViewCell, UIAlertViewDelegate {
         // Configure the view for the selected state
     }
    
-    
-    @IBAction func onButtonAddPressed(sender: AnyObject) {
-        /*
-        let alertView = UIAlertView(
-            title: "New Entry",
-            message: "Add new entry?",
-            delegate: self,
-            cancelButtonTitle: "Cancel",
-            otherButtonTitles: "Add"
-        )
-        
-        alertView.show()
-        */
-        
-        delegate?.cellAddEntryButtonPressed(self)
-        
-    }
-    
     func updateCellContents(entryObject: DXEntryObject) {
         
         lblCount.text = "\(entryObject.events.count)"
@@ -67,31 +52,10 @@ class DXEntryTableViewCell: UITableViewCell, UIAlertViewDelegate {
         imgIcon.image = image
     }
     
-    func alertView(alertView: UIAlertView, didDismissWithButtonIndex buttonIndex: Int) {
-        switch buttonIndex {
-        case alertView.cancelButtonIndex :
-            break
-            
-        case 1 :
-            var date =  NSDate()
-            
-            var newEntry : DXEventObject = DXEventObject()
-            newEntry.date = date;
-            newEntry.location = DXLocationManager.sharedInstance.location
-            newEntry.text = "New Entry"
-            
-            if entryObject != nil {
-                entryObject!.events.addObject(newEntry)
-                self.lblCount.text = "\(entryObject!.events.count)"
-                delegate?.cellValueChanged(self)
-            }
-            
-            //DXLocationManager.sharedInstance
-            
-            
-        
-        default :
-            println("SWITCH: Missing statemant")
-        }
+    
+    // MARK: - User Actions
+    
+    @IBAction func onButtonAddPressed(sender: AnyObject) {
+        delegate?.cellAddEntryButtonPressed(self)
     }
 }
