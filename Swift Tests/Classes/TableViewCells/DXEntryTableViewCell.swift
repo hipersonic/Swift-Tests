@@ -62,7 +62,9 @@ class DXEntryTableViewCell: UITableViewCell, UIAlertViewDelegate {
         lblCount.text = "\(entryObject.events.count)"
         lblTitle.text = entryObject.name
         
-        imgIcon.image = UIImage(named: entryObject.iconName! + ".png")
+        var imgName = entryObject.iconName!
+        var image = UIImage(named: imgName)
+        imgIcon.image = image
     }
     
     func alertView(alertView: UIAlertView, didDismissWithButtonIndex buttonIndex: Int) {

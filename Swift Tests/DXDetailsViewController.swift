@@ -77,7 +77,9 @@ class DXDetailsViewController: UIViewController {
         lblDetails.text = entryObject.events.count > 0 ? "\(entryObject.events.count) entries \(daysString)" : "No entries"
         lblTitle.text = entryObject.name
         
-        imgIcon.image = UIImage(named: entryObject.iconName! + ".png")
+        var imgName = entryObject.iconName!
+        var image = UIImage(named: imgName)
+        imgIcon.image = image
         
         lblIncome.text = "Income: \(entryObject.allEventsIncomeSum())"
     }
@@ -99,53 +101,7 @@ class DXDetailsViewController: UIViewController {
         var cell = tableView.dequeueReusableCellWithIdentifier("DetailsCell", forIndexPath: indexPath) as! DXDetailsTableViewCell
         
         let event = entryObject?.events[indexPath.row] as! DXEventObject
-        
-        if event.date != nil {
-            let dateFormatter = NSDateFormatter()
-            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
-            
-            cell.lblDate?.text = dateFormatter.stringFromDate(event.date!);
-        }
-        
-        if event.location != nil {
-            CLGeocoder().reverseGeocodeLocation(event.location, completionHandler: {(placemarks, error)-> Void in
-                if (error != nil) {
-                    println("Reverse geocoder failed with error" + error.localizedDescription)
-                    return
-                }
-                
-                
-                if placemarks.count > 0 {
-                    let placemark : CLPlacemark = placemarks[0] as! CLPlacemark
-
-                    var text = placemark.subLocality
-                    
-                    if text == nil {
-                        text = placemark.thoroughfare
-                    }
-                    if text == nil {
-                        text = placemark.name
-                    }
-                    if text == nil {
-                        text = placemark.locality
-                    }
-                    if text == nil {
-                        text = ""
-                    }
-                    
-                    cell.lblLocation.text = text
-                    
-                } else {
-                    println("Problem with the data received from geocoder")
-                }
-            })
-
-            
-        } else {
-            cell.lblLocation.text = "Unknown Location"
-        }
-        
-        
+        cell.eventObject = event
         return cell
     }
 }

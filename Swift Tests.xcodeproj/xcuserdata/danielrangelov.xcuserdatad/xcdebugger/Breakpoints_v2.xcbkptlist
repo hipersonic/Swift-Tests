@@ -25,13 +25,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Swift Tests/DXEntryObject.swift"
-            timestampString = "461233499.139369"
+            filePath = "Swift Tests/DXDetailsViewController.swift"
+            timestampString = "461243906.845889"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "78"
-            endingLineNumber = "78"
-            landmarkName = "allEventsIncomeSum()"
+            startingLineNumber = "83"
+            endingLineNumber = "83"
+            landmarkName = "updateContents(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -41,29 +41,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Swift Tests/Classes/DXEventObject.swift"
-            timestampString = "461233668.204427"
+            filePath = "Swift Tests/Classes/TableViewCells/DXEntryTableViewCell.swift"
+            timestampString = "461243906.845889"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "38"
-            endingLineNumber = "38"
-            landmarkName = "restoreFromDictionary(_:)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Swift Tests/DXEntryObject.swift"
-            timestampString = "461233627.605452"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "25"
-            endingLineNumber = "25"
-            landmarkName = "restoreFromDictionary(_:)"
+            startingLineNumber = "67"
+            endingLineNumber = "67"
+            landmarkName = "updateCellContents(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

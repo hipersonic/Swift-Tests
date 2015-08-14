@@ -43,7 +43,7 @@
 		<key>name</key>
 		<string>Autocom</string>
 		<key>icon_name</key>
-		<string>autocom</string>
+		<string>Autocom</string>
 		<key>events</key>
 		<array/>
 	</dict>
@@ -59,7 +59,7 @@
 		<key>name</key>
 		<string>Lexia</string>
 		<key>icon_name</key>
-		<string>lexia</string>
+		<string>Lexia_Tool</string>
 		<key>events</key>
 		<array/>
 	</dict>
