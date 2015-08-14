@@ -15,20 +15,13 @@ class DXDetailsViewController: UIViewController {
     @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var lblDetails: UILabel!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var lblIncome: UILabel!
     
-    var events:NSMutableArray  = []
     
-    var entryDescription:NSMutableDictionary = [:] {
+    var entryObject:DXEntryObject?  {
         didSet {
-            let tmpEvents = entryDescription["events"] as! NSMutableArray
-            
-            for event in tmpEvents {
-                let eventLoaded : DXEventObject = DXEventObject.initContentFromDictionary(event as! NSDictionary)
-                events.addObject(eventLoaded)
-            }
-            
             if self.isViewLoaded() {
-                updateContents(entryDescription)
+                updateContents(entryObject!)
             }
         }
     }
@@ -38,8 +31,9 @@ class DXDetailsViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         
-        if (entryDescription.allKeys.count > 0) {
-            updateContents(entryDescription)
+        
+        if entryObject != nil {
+            updateContents(entryObject!)
         }
     }
     
@@ -47,16 +41,11 @@ class DXDetailsViewController: UIViewController {
     
     @IBAction func onBarButtonMapPressed(sender: AnyObject) {
         
-        var locations : NSMutableArray = []
-        
-        for event in events {
-            let tmpLocation : CLLocation = event.location
-            locations.addObject(tmpLocation)
-        }
-        
         var viewController = self.storyboard?.instantiateViewControllerWithIdentifier("MapVC") as! DXMapViewController
         
-        viewController.locations = locations
+        if entryObject != nil {
+            viewController.locations = entryObject!.locations()
+        }
         
         self.navigationController?.pushViewController(viewController, animated: true)
     }
@@ -67,13 +56,12 @@ class DXDetailsViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func updateContents(description: NSDictionary) {
-        var events = description["events"] as! NSMutableArray
+    func updateContents(entryObject: DXEntryObject) {
         
         var daysPassed:Int = 0
         
-        if events.count > 0 {
-            var event:DXEventObject =  DXEventObject.initContentFromDictionary(events[0] as! NSDictionary)
+        if entryObject.events.count > 0 {
+            var event =  entryObject.events[0] as! DXEventObject
             if event.date != nil {
                 let dateFirst:NSDate = event.date!
                 
@@ -86,10 +74,12 @@ class DXDetailsViewController: UIViewController {
         }
         
         let daysString = daysPassed > 0 ? "in \(daysPassed) days" : ""
-        lblDetails.text = events.count > 0 ? "\(events.count) entries \(daysString)" : "No entries"
-        lblTitle.text = description["name"] as! NSString as String
-        var imgName = description["icon_name"] as! NSString as String
-        imgIcon.image = UIImage(named: "\(imgName).png")
+        lblDetails.text = entryObject.events.count > 0 ? "\(entryObject.events.count) entries \(daysString)" : "No entries"
+        lblTitle.text = entryObject.name
+        
+        imgIcon.image = UIImage(named: entryObject.iconName! + ".png")
+        
+        lblIncome.text = "Income: \(entryObject.allEventsIncomeSum())"
     }
 
     @IBAction func onButtonResetPressed(sender: AnyObject) {
@@ -98,19 +88,17 @@ class DXDetailsViewController: UIViewController {
     
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        var count = 0
-        if (entryDescription.allKeys.count > 0) {
-            var events = entryDescription["events"] as! NSMutableArray
-            count = events.count
+        var count : Int = 0
+        if entryObject != nil {
+            count = entryObject!.events.count
         }
-        
         return count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell = tableView.dequeueReusableCellWithIdentifier("DetailsCell", forIndexPath: indexPath) as! DXDetailsTableViewCell
         
-        let event = events[indexPath.row] as! DXEventObject
+        let event = entryObject?.events[indexPath.row] as! DXEventObject
         
         if event.date != nil {
             let dateFormatter = NSDateFormatter()

@@ -62,5 +62,12 @@ class DXEventObject: NSObject {
         
         return result
     }
+    
+    override var description : String {
+        return " text : \(text) " +
+        " date : \(date) " +
+        " price : \(price) " +
+        " location : \(location) "
+    }
 }
 

@@ -12,33 +12,15 @@ import CoreLocation
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, CellProtocol, AddEntryProtocol{
     @IBOutlet weak var tableView: UITableView!
-    var entries: NSMutableArray = []
     var path : String = ""
     var indexPathUpdatedCell:NSIndexPath?
     
-    func loadDataPlist(){
-        let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true) as NSArray
-        let documentsDirectory = paths.objectAtIndex(0) as! NSString
-        path = documentsDirectory.stringByAppendingPathComponent("Entries.plist")
-        
-        let fileManager = NSFileManager.defaultManager()
-        if(!fileManager.fileExistsAtPath(path))
-        {
-            //Copy the plist from the bundle to the documents directory
-            let bundle = NSBundle.mainBundle().pathForResource("Entries", ofType: "plist")
-            fileManager.copyItemAtPath(bundle!, toPath: path, error:nil)
-        }
-        entries = NSMutableArray(contentsOfFile: path)!
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
         tableView.numberOfSections()
-        
-        loadDataPlist()
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -49,26 +31,28 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     @IBAction func onBarButtonMapPressed(sender: AnyObject) {
         var viewController = self.storyboard?.instantiateViewControllerWithIdentifier("MapVC") as! DXMapViewController;
-        viewController.locations = NSArray()
+        var allLocations = NSMutableArray()
+        for entry in DXDataProvider.sharedInstance.entries {
+            let tmpEntry = entry as! DXEntryObject
+            
+            allLocations.addObjectsFromArray(tmpEntry.locations() as [AnyObject])
+        }
+        viewController.locations = allLocations
         self.navigationController?.pushViewController(viewController, animated: true)
     }
 
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return entries.count
+        return DXDataProvider.sharedInstance.entries.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell = tableView.dequeueReusableCellWithIdentifier("EntryCell", forIndexPath: indexPath) as! DXEntryTableViewCell
         
-        var currentEntry = entries[indexPath.row] as! NSMutableDictionary
-        if currentEntry["events"]  == nil {
-            currentEntry["events"] = NSMutableArray()
-        }
-        var events = currentEntry["events"] as! NSMutableArray
+        var currentEntry = DXDataProvider.sharedInstance.entries[indexPath.row] as! DXEntryObject
         
         cell.delegate = self;
-        cell.entryDescription = currentEntry
+        cell.entryObject = currentEntry
         
         return cell
     }
@@ -76,20 +60,19 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         var viewController = self.storyboard?.instantiateViewControllerWithIdentifier("DetailsVC") as! DXDetailsViewController;
         
-        var currentEntry = entries[indexPath.row] as! NSMutableDictionary
-        viewController.entryDescription = currentEntry
+        var currentEntry = DXDataProvider.sharedInstance.entries[indexPath.row] as! DXEntryObject
+        viewController.entryObject = currentEntry
         
         self.navigationController?.pushViewController(viewController, animated: true)
     }
     
     func cellValueChanged(sender: DXEntryTableViewCell) {
         var indexPathRow = tableView.indexPathForCell(sender)?.row
-        var dictionary = sender.entryDescription
 
-        entries.removeObjectAtIndex(indexPathRow!)
-        entries.insertObject(dictionary, atIndex: indexPathRow!)
+        DXDataProvider.sharedInstance.entries.removeObjectAtIndex(indexPathRow!)
+        DXDataProvider.sharedInstance.entries.insertObject(sender.entryObject!, atIndex: indexPathRow!)
         
-        entries.writeToFile(path, atomically: false)
+        DXDataProvider.sharedInstance.saveData()
         
         let resultDictionary = NSMutableArray(contentsOfFile: path)
         //println("Saved Entries.plist file is --> \(resultDictionary)")
@@ -108,9 +91,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         if indexPathUpdatedCell != nil {
             var date =  NSDate()
             
-            var currentEntry = entries[indexPathUpdatedCell!.row] as! NSMutableDictionary
+            var currentEntry = DXDataProvider.sharedInstance.entries[indexPathUpdatedCell!.row] as! DXEntryObject
             
-            var events = currentEntry["events"] as! NSMutableArray
+            var events = currentEntry.events
             
             var newEvent : DXEventObject = DXEventObject()
             newEvent.date = date;
@@ -122,11 +105,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             
             var indexPathRow = indexPathUpdatedCell!.row
             
-            entries.removeObjectAtIndex(indexPathRow)
-            entries.insertObject(currentEntry, atIndex: indexPathRow)
+            DXDataProvider.sharedInstance.entries.removeObjectAtIndex(indexPathRow)
+            DXDataProvider.sharedInstance.entries.insertObject(currentEntry, atIndex: indexPathRow)
             
-            entries.writeToFile(path, atomically: false)
-            
+            DXDataProvider.sharedInstance.saveData()
+        
             tableView.reloadData()
         }
         

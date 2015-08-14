@@ -10,10 +10,22 @@ import UIKit
 
 class DXDataProvider: NSObject {
     
+    static let sharedInstance = DXDataProvider()
+    
     var entries: NSMutableArray = []
     var path : String = ""
     
-    func loadData(){
+    
+    override init() {
+        //Setup LocationManager
+        super.init()
+        
+        loadData()
+    }
+    
+    func loadData () {
+        entries.removeAllObjects()
+        
         let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true) as NSArray
         let documentsDirectory = paths.objectAtIndex(0) as! NSString
         path = documentsDirectory.stringByAppendingPathComponent("Entries.plist")
@@ -25,10 +37,16 @@ class DXDataProvider: NSObject {
             let bundle = NSBundle.mainBundle().pathForResource("Entries", ofType: "plist")
             fileManager.copyItemAtPath(bundle!, toPath: path, error:nil)
         }
-        entries = NSMutableArray(contentsOfFile: path)!
+        
+        let plistEntries : NSArray = NSArray(contentsOfFile: path)!
+        
+        for dictEntry in plistEntries {
+            let newEntry = DXEntryObject.initContentFromDictionary(dictEntry as! NSDictionary)
+            entries.addObject(newEntry)
+        }
     }
 
-    func saveData() {
+    func saveData () {
         entries.writeToFile(path, atomically: false)
     }
     

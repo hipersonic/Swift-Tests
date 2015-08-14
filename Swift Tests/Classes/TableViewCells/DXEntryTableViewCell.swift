@@ -21,9 +21,9 @@ class DXEntryTableViewCell: UITableViewCell, UIAlertViewDelegate {
     
     var delegate:CellProtocol?
     
-    var entryDescription:NSMutableDictionary = [:] {
+    var entryObject:DXEntryObject? {
         didSet {
-            updateCellContents(entryDescription)
+            updateCellContents(entryObject!)
         }
     }
     
@@ -57,14 +57,12 @@ class DXEntryTableViewCell: UITableViewCell, UIAlertViewDelegate {
         
     }
     
-    func updateCellContents(description: NSDictionary) {
+    func updateCellContents(entryObject: DXEntryObject) {
         
-        var events = description["events"] as! NSMutableArray
+        lblCount.text = "\(entryObject.events.count)"
+        lblTitle.text = entryObject.name
         
-        self.lblCount.text = "\(events.count)"
-        self.lblTitle.text = description["name"] as! NSString as String
-        var imgName = description["icon_name"] as! NSString as String
-        self.imgIcon.image = UIImage(named: "\(imgName).png")
+        imgIcon.image = UIImage(named: entryObject.iconName! + ".png")
     }
     
     func alertView(alertView: UIAlertView, didDismissWithButtonIndex buttonIndex: Int) {
@@ -80,14 +78,15 @@ class DXEntryTableViewCell: UITableViewCell, UIAlertViewDelegate {
             newEntry.location = DXLocationManager.sharedInstance.location
             newEntry.text = "New Entry"
             
-            var events = entryDescription["events"] as! NSMutableArray
-            events.addObject(newEntry.dictionaryRepresentation())
-            
-            self.lblCount.text = "\(events.count)"
+            if entryObject != nil {
+                entryObject!.events.addObject(newEntry)
+                self.lblCount.text = "\(entryObject!.events.count)"
+                delegate?.cellValueChanged(self)
+            }
             
             //DXLocationManager.sharedInstance
             
-            delegate?.cellValueChanged(self)
+            
         
         default :
             println("SWITCH: Missing statemant")

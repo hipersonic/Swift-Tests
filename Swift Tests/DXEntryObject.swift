@@ -11,7 +11,6 @@ import UIKit
 class DXEntryObject: NSObject {
     var iconName : String?
     var name : String?
-    var date: NSDate?
     var events: NSMutableArray = []
     
     class func initContentFromDictionary(dictionary:NSDictionary) -> DXEntryObject {
@@ -58,4 +57,34 @@ class DXEntryObject: NSObject {
         return result
     }
 
+    override var description : String {
+        return " name : \(name) " +
+        " icon : \(iconName) " +
+        " events : \(events) "
+    }
+    
+    func locations() -> NSArray {
+        var result = NSMutableArray()
+        for event in events {
+            let tmpEvent = event as? DXEventObject
+            if tmpEvent != nil && tmpEvent!.location != nil{
+                result.addObject(tmpEvent!.location!)
+            }
+        }
+        return result
+    }
+    
+    func allEventsIncomeSum () -> Int {
+        var sum : Int = 0
+        
+        for event in events {
+            let tmpEvent = event as? DXEventObject
+            if tmpEvent != nil{
+                sum += tmpEvent!.price
+            }
+        }
+
+        
+        return sum
+    }
 }

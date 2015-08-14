@@ -34,6 +34,8 @@
 				<string>Stoyan C8 - Scenic</string>
 				<key>date</key>
 				<date>2015-08-12T16:30:07Z</date>
+				<key>price</key>
+				<integer>30</integer>
 			</dict>
 		</array>
 	</dict>
